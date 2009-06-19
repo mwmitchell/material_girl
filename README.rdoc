@@ -17,10 +17,10 @@ Basically, let's say you have an array of objects. Each of those objects has a f
   end
 
 "composite" is now a root composite object that has put the structure above into something like:
-root
-  colors
-    red
-    blue
-      light
-    purple
-      dark
+  root
+    colors
+      red
+      blue
+        light
+      purple
+        dark
