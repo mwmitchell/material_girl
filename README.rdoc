@@ -24,3 +24,12 @@ Basically, let's say you have an array of objects. Each of those objects has a f
         light
       purple
         dark
+
+==MaterialGirl::Composite
+MaterialGirl.parse returns a MaterialGirl::Composite object. This composite thingy has some nice methods for working with the resulting tree:
+
+  root = MaterialGirl.parse(array_of_things)
+  root.children
+  root.descendants
+  root.descendants.last.ancestors
+  root.children.first.siblings
