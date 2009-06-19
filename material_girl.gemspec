@@ -3,6 +3,7 @@ Gem::Specification.new do |s|
   s.name = "material_girl"
   s.version = "0.0.1"
   s.date = "2009-06-18"
+  s.summary = "A library parsing materialized paths"
   
   s.files = [
     "README.rdoc",
