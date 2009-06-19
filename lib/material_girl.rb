@@ -10,8 +10,8 @@ module MaterialGirl
       val = block_given? ? yield(item) : item[opts[:field]].to_s.split(opts[:delimiter])
       acc = nil # define in outer scope to set the :item
       val.compact.inject(root) do |acc,k|
-        acc.children << Composite.new(k, acc) unless acc.children.any?{|i|i.label==k}
-        acc.children.detect{|i|i.label==k}
+        acc.children << Composite.new(k, acc) unless acc.children.any?{|i|i.value==k}
+        acc.children.detect{|i|i.value==k}
       end
       # the last path item is always the object
       acc.children.last.object = item
@@ -21,11 +21,11 @@ module MaterialGirl
 
   class Composite
 
-    attr_reader :label, :parent
+    attr_reader :value, :parent
     attr_accessor :object
 
-    def initialize(label='', parent=nil)
-      @label, @parent = label, parent
+    def initialize(value='', parent=nil)
+      @value, @parent = value, parent
     end
 
     def children
@@ -33,17 +33,21 @@ module MaterialGirl
     end
 
     def descendants
-      self.children.map{|c|c.children + c.descendants}.flatten
+      self.children + self.children.map{|c| c.descendants }.flatten
     end
 
     def ancestors
-      (self.parent and self.parent.parent) ? ([self.parent.parent] + self.parent.ancestors) : []
+      self.parent ? ([self.parent] + self.parent.ancestors) : []
     end
 
     def siblings
       self.parent ? (self.parent.children - [self]) : []
     end
-
+    
+    def self_and_siblings
+      self.parent ? (self.parent.children) : []
+    end
+    
   end
   
 end
