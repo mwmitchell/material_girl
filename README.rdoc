@@ -6,21 +6,21 @@ Basically, let's say you have an array of objects. Each of those objects has a f
 
   docs = [
     {:path=>'colors::red'},
-	{:path=>'colors::blue'},
-	{:path=>'colors::blue::light'},
-	{:path=>'colors::purple'}
-	{:path=>'colors::purple::dark'}
+    {:path=>'colors::blue'},
+    {:path=>'colors::blue::light'},
+    {:path=>'colors::purple'}
+    {:path=>'colors::purple::dark'}
   ]
 
   composite = MaterialGirl.parse(docs) do |doc|
-	doc[:path].split('::')
+    doc[:path].split('::')
   end
 
 "composite" is now a root composite object that has put the structure above into something like:
 root
-	colors
-		red
-		blue
-			light
-		purple
-			dark
+  colors
+    red
+    blue
+      light
+    purple
+      dark
